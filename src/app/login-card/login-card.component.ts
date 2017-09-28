@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/catch';
 
 @Component({
@@ -14,17 +15,18 @@ export class LoginCardComponent implements OnInit {
   private password = '';
   private error: string;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router) { }
 
   ngOnInit() {
   }
 
   get disableButton() {
     return this.username.length === 0 ||
-           this.password.length === 0;
+      this.password.length === 0;
   }
 
   submitCredentials() {
+
     const payload = {
       username: this.username,
       password: this.password
@@ -38,16 +40,16 @@ export class LoginCardComponent implements OnInit {
       .get(cookieUrl, options)
       .catch(() => this.http.put(sessionUrl, payload, options))
       .subscribe(
-        () => {
-          this.error = '';
-          console.log('logged in');
-        },
-        e => {
-          if (e.status === 401) {
-            this.error = 'Could not log in with those credentials';
-          }
-        },
-      );
+      () => {
+        this.error = '';
+        this.router.navigate(['/main']);
+      },
+      e => {
+        if (e.status === 401) {
+          this.error = 'Could not log in with those credentials';
+        }
+      },
+    );
   }
 
 }

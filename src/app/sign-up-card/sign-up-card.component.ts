@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/catch';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up-card',
@@ -14,7 +15,7 @@ export class SignUpCardComponent implements OnInit {
     private error: string;
 
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private router: Router) { }
 
   ngOnInit() {
   }
@@ -40,7 +41,7 @@ export class SignUpCardComponent implements OnInit {
         .subscribe(
           () => {
             this.error = '';
-            console.log('logged in');
+            this.router.navigate(['/main']);
           },
           e => {
             if (e.status === 401) {

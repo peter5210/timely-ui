@@ -16,4 +16,25 @@
     padding: 8px 16px;
     display: flex;
     justify-content: flex-end;
-  }  
+  }
+  
+  a.button, /* Hello, a tag */
+  button {
+    border: 0;
+    background-color: transparent;
+    text-transform: uppercase;
+    color: #ff6d00;
+    padding: 4px 8px;  /* Padding for all button-y things */
+    text-decoration: none; /* No underlines for <a> tags */
+  }
+  
+  a.button:hover, /* Hello, a tag */
+  button:active {
+    background-color: #eeeeee;
+  }
+  
+  a.button[disabled], /* Hello, a tag */
+  button[disabled] {
+    color: #eeeeee;
+  }
+  
